@@ -1040,7 +1040,8 @@ namespace Xceed.Wpf.AvalonDock.Layout
 
     private object ReadElement( XmlReader reader )
     {
-      while( reader.NodeType == XmlNodeType.Whitespace )
+      // Skip white spaces and Xml comments in layout file
+      while( reader.NodeType == XmlNodeType.Whitespace || reader.NodeType == XmlNodeType.Comment)
       {
         reader.Read();
       }
@@ -1097,7 +1098,15 @@ namespace Xceed.Wpf.AvalonDock.Layout
           var type = LayoutRoot.FindType( reader.LocalName );
           if( type == null )
           {
-            throw new ArgumentException( "AvalonDock.LayoutRoot doesn't know how to deserialize " + reader.LocalName );
+            string mess = string.Format("AvalonDock.LayoutRoot doesn't know how to deserialize '{0}'", reader.LocalName);
+            var xmlReader = reader as XmlTextReader;
+            if (xmlReader != null)
+              mess += string.Format(" at line {0} position {1}", xmlReader.LineNumber, xmlReader.LinePosition);
+
+            // This is usually thrown if the:
+            // required format is not correct Xml or
+            // if there is a required element missing (e.g. '<Hidden />')
+            throw new ArgumentException( mess );
           }
           serializer = new XmlSerializer( type );
           break;
