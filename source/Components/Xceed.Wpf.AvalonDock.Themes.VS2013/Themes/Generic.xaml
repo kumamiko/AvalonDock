@@ -1,5 +1,4 @@
-﻿
-<!--
+﻿<!--
     ***********************************************************************************
     
     AvalonDock
@@ -26,10 +25,10 @@
                     xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:reskeys="clr-namespace:Xceed.Wpf.AvalonDock.Themes.VS2013.Themes"
                     >
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.VS2013;component/OverlayButtons.xaml" />
-            <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.VS2013;component/Themes/Menu/MenuItem.xaml" />
-        </ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.VS2013;component/OverlayButtons.xaml" />
+        <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.VS2013;component/Themes/Menu/MenuItem.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <avalonDockConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <avalonDockConverters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
@@ -138,7 +137,7 @@
                                                 <Setter Property="IconTemplate" Value="{Binding Path=Root.Manager.IconContentTemplate}" />
                                                 <Setter Property="IconTemplateSelector" Value="{Binding Path=Root.Manager.IconContentTemplateSelector}" />
                                                 <Setter Property="Command" Value="{Binding Path=., Converter={StaticResource ActivateCommandLayoutItemFromLayoutModelConverter}}" />
-                                                
+
                                                 <!--
                                                   Retemplate ControlTemplate of MenuItem to get rid of blue'ish highlighting colors on menu item
                                                   https://stackoverflow.com/questions/34888636/change-background-color-of-menuitem-on-mouseover -->
@@ -765,75 +764,133 @@
                               Fill="{DynamicResource {x:Static reskeys:ResourceKeys.PreviewBoxBackgroundBrushKey}}"
                               Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.PreviewBoxBorderBrushKey}}"
                               StrokeThickness="2" />
-                        
+
                         <!-- Outmost Outter 4 overlay buttons that are displayed at border of MainWindow
                              when user drags tool window over another tool window or document and the
                              AvalonDock air space contains additional document(s) and tool windows (s).
                         -->
                         <Grid x:Name="PART_DockingManagerDropTargets">
-                            <ContentControl x:Name="PART_DockingManagerDropTargetLeft"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                    Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="0"
-                                    HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Stretch"
-                                    Padding="0"
-                                    Content="{StaticResource DockAnchorableLeft}"
-                                />
-
-                            <ContentControl x:Name="PART_DockingManagerDropTargetRight"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                    Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="0"
-                                    HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Stretch"
-                                    Padding="0"
-                                    Content="{StaticResource DockAnchorableRight}"
-                                />
-
-                            <ContentControl x:Name="PART_DockingManagerDropTargetBottom"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                    Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="0"
-                                    HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Stretch"
-                                    Padding="0"
-                                    Content="{StaticResource DockAnchorableBottom}"
-                                />
-
-                            <ContentControl x:Name="PART_DockingManagerDropTargetTop"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                    Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="0"
-                                    HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Stretch"
-                                    Padding="0"
-                                    Content="{StaticResource DockAnchorableTop}"
-                                />
-
+                            <!--Left-->
+                            <Border BorderThickness="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                BorderBrush="#cccedb"
+                                x:Name="PART_DockingManagerDropTargetLeft">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.4"/>
+                                </Border.Background>
+                                <Grid Opacity="0.9"
+                                      Height="37"
+                                      Width="37">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <!--<Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 30 15 l0 8 l-4 -4 z"
+                                        Fill="#333"/>-->
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 8 8 l0 20 a 2 2 0 0 0 2 2 l7 0 a 2 2 0 0 0 2 -2 l0 -20 z M 8 9 l11 0 M 8 10 l11 0"
+                                        />
+                                </Grid>
+                            </Border>
+                            <!--Right-->
+                            <Border BorderThickness="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                BorderBrush="#cccedb"
+                                x:Name="PART_DockingManagerDropTargetRight">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.4"/>
+                                </Border.Background>
+                                <Grid Opacity="0.9"
+                                    Height="37"
+                                    Width="37">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <!--<Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 15 l0 8 l4 -4 z"
+                                        Fill="#333"/>-->
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 19 8 l0 20 a 2 2 0 0 0 2 2 l7 0 a 2 2 0 0 0 2 -2 l0 -20 z M 19 9 l11 0 M 19 10 l11 0"
+                                        />
+                                </Grid>
+                            </Border>
+                            <!--Bottom-->
+                            <Border BorderThickness="1"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                BorderBrush="#cccedb"
+                                x:Name="PART_DockingManagerDropTargetBottom">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.3"/>
+                                </Border.Background>
+                                <Grid Opacity="0.9"
+                                    Height="37"
+                                    Width="37">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <!--<Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 15 8 l8 0 l-4 4 z"
+                                        Fill="#333"/>-->
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 18 l0 10 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -10 z M 7 19 l23 0 M 7 20 l23 0"
+                                        />
+                                </Grid>
+                            </Border>
+                            <!--Top-->
+                            <Border BorderThickness="1"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                BorderBrush="#cccedb"
+                                x:Name="PART_DockingManagerDropTargetTop">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.3"/>
+                                </Border.Background>
+                                <Grid Opacity="0.9"
+                                    Height="37"
+                                    Width="37">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <!--<Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 15 30 l8 0 l-4 -4 z"
+                                        Fill="#333"/>-->
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 9 l0 10 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -10 z M 7 10 l23 0 M 7 11 l23 0"
+                                        />
+                                </Grid>
+                            </Border>
                         </Grid>
 
                         <!-- Is displayed as center cross with a max of 5 buttons when a toolwindow is
                              dragged over another tool window -->
                         <Grid x:Name="PART_AnchorablePaneDropTargets">
-                            <Grid HorizontalAlignment="Center"
-                                  VerticalAlignment="Center">
+                            <Grid Width="114"
+                                Height="114"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
@@ -844,121 +901,122 @@
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-
-                                <!-- Gray Star Background -->
-                                <Grid Grid.RowSpan="3"
-                                      Grid.ColumnSpan="3">
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderThickness="0"
-                                            Grid.Column="1" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,2,2,0"
-                                            Grid.Column="1" Grid.Row="0" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,2,0,2"
-                                            Grid.Column="0" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="0,2,2,2"
-                                            Grid.Column="2" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,0,2,2"
-                                            Grid.Column="1" Grid.Row="2" />
+                                <!--Background Path-->
+                                <Path Grid.ColumnSpan="3"
+                                    Grid.RowSpan="3"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Stroke="#cddede"
+                                    StrokeThickness="1"
+                                    Data="M36 0 l40 0 l0 26 l10 10 l26 0 l0 40 l-26 0 l-10 10 l0 26 l-40 0 l0 -26 l-10 -10 l-26 0 l0 -40 l26 0 l10 -10 z">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="White" Opacity="0.5"/>
+                                    </Path.Fill>
+                                </Path>
+                                <!--Top-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="0"
+                                    Opacity="0.9"
+                                    Name="PART_AnchorablePaneDropTargetTop">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 15 30 l8 0 l-4 -4 z"
+                                        Fill="#333"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 9 l0 10 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -10 z M 7 10 l23 0 M 7 11 l23 0"
+                                        />
                                 </Grid>
-
-                                <!-- Inner 5 buttons of star shapped control -->
-                                <ContentControl x:Name="PART_AnchorablePaneDropTargetTop"
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentAsAnchorableTop}"
-                                    />
-                                <ContentControl x:Name="PART_AnchorablePaneDropTargetRight"
-                                        Grid.Row="1"
-                                        Grid.Column="2"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentAsAnchorableRight}"
-                                    />
-                                <ContentControl x:Name="PART_AnchorablePaneDropTargetBottom"
-                                        Grid.Row="2"
-                                        Grid.Column="1"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentAsAnchorableBottom}"
-                                    />
-                                <ContentControl x:Name="PART_AnchorablePaneDropTargetLeft"
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentAsAnchorableLeft}"
-                                    />
-                                <!-- Center button of star shapped control -->
-                                <ContentControl x:Name="PART_AnchorablePaneDropTargetInto"
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentInside}"
-                                    />
+                                <!--Right-->
+                                <Grid Grid.Column="2"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_AnchorablePaneDropTargetRight">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 15 l0 8 l4 -4 z"
+                                        Fill="#333"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 19 8 l0 20 a 2 2 0 0 0 2 2 l7 0 a 2 2 0 0 0 2 -2 l0 -20 z M 19 9 l11 0 M 19 10 l11 0"
+                                        />
+                                </Grid>
+                                <!--Bottom-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="2"
+                                    Opacity="0.9"
+                                    Name="PART_AnchorablePaneDropTargetBottom">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 15 8 l8 0 l-4 4 z"
+                                        Fill="#333"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 18 l0 10 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -10 z M 7 19 l23 0 M 7 20 l23 0"
+                                        />
+                                </Grid>
+                                <!--Left-->
+                                <Grid Grid.Column="0"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_AnchorablePaneDropTargetLeft">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="Red"
+                                        StrokeThickness="0"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 30 15 l0 8 l-4 -4 z"
+                                        Fill="#333"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 8 8 l0 20 a 2 2 0 0 0 2 2 l7 0 a 2 2 0 0 0 2 -2 l0 -20 z M 8 9 l11 0 M 8 10 l11 0"
+                                        />
+                                </Grid>
+                                <!--Center-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_AnchorablePaneDropTargetInto">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                </Grid>
                             </Grid>
                         </Grid>
-                        
+
                         <!-- Is displayed as center cross with a max of 5 buttons when documents are dragged over the document container. -->
                         <Grid x:Name="PART_DocumentPaneDropTargets">
-                            <Grid HorizontalAlignment="Center"
-                                  VerticalAlignment="Center">
+                            <Grid Width="114"
+                                Height="114"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
@@ -969,118 +1027,128 @@
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-
-                                <!-- Gray Star Background -->
-                                <Grid Grid.RowSpan="3"
-                                      Grid.ColumnSpan="3">
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderThickness="0"
-                                            Grid.Column="1" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,2,2,0"
-                                            Grid.Column="1" Grid.Row="0" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,2,0,2"
-                                            Grid.Column="0" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="0,2,2,2"
-                                            Grid.Column="2" Grid.Row="1" />
-
-                                    <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBackgroundBrushKey}}"
-                                            BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonStarBorderBrushKey}}"
-                                            BorderThickness="2,0,2,2"
-                                            Grid.Column="1" Grid.Row="2" />
+                                <Image Grid.ColumnSpan="3"
+                                    Grid.RowSpan="3"
+                                    Source="Images/DockPaneEmpty.PNG"
+                                    Stretch="None" 
+                                    Opacity="0">
+                                </Image>
+                                <Path Grid.ColumnSpan="3"
+                                    Grid.RowSpan="3"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Stroke="#cddede"
+                                    StrokeThickness="1"
+                                    Data="M36 0 l40 0 l0 26 l10 10 l26 0 l0 40 l-26 0 l-10 10 l0 26 l-40 0 l0 -26 l-10 -10 l-26 0 l0 -40 l26 0 l10 -10 z">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="White" Opacity="0.3"/>
+                                    </Path.Fill>
+                                </Path>
+                                <!--Top-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="0"
+                                    Opacity="0.9"
+                                    Name="PART_DocumentPaneDropTargetTop"
+                                    >
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        StrokeDashArray="2 1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 20 l24 0"
+                                        />
                                 </Grid>
-
-                                <!-- Inner 5 buttons of star shapped control -->
-                                <ContentControl x:Name="PART_DocumentPaneDropTargetTop"
-                                        Grid.Row="0"
-                                        Grid.Column="1"                                        
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentTop}"
-                                    />
-                                <ContentControl x:Name="PART_DocumentPaneDropTargetRight"
-                                        Grid.Row="1"
-                                        Grid.Column="2"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentRight}"
-                                    />
-                                <ContentControl x:Name="PART_DocumentPaneDropTargetBottom"
-                                        Grid.Row="2"
-                                        Grid.Column="1"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentBottom}"
-                                    />
-                                <ContentControl x:Name="PART_DocumentPaneDropTargetLeft"
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentLeft}"
-                                    />
-                                <!-- Center button of star shapped control -->
-                                <ContentControl x:Name="PART_DocumentPaneDropTargetInto"
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Width="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonWidthKey}}"
-                                        Height="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonHeightKey}}"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Stretch"
-                                        Padding="0"
-                                        Content="{StaticResource DockDocumentInside}"
-                                    />
+                                <!--Right-->
+                                <Grid Grid.Column="2"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_DocumentPaneDropTargetRight">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        StrokeDashArray="2 1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 19 8 l0 20"
+                                        />
+                                </Grid>
+                                <!--Bottom-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="2"
+                                    Opacity="0.9"
+                                    Name="PART_DocumentPaneDropTargetBottom">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        StrokeDashArray="2 1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 20 l24 0"
+                                        />
+                                </Grid>
+                                <!--Left-->
+                                <Grid Grid.Column="0"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_DocumentPaneDropTargetLeft">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        StrokeDashArray="2 1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 19 8 l0 20"
+                                        />
+                                </Grid>
+                                <!--Center-->
+                                <Grid Grid.Column="1"
+                                    Grid.Row="1"
+                                    Opacity="0.9"
+                                    Name="PART_DocumentPaneDropTargetInto">
+                                    <Border Margin="3"
+                                        Background="White"
+                                        CornerRadius="3"
+                                        Opacity="1"/>
+                                    <Path Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.DockingButtonForegroundBrushKey}}"
+                                        StrokeThickness="1"
+                                        Margin="0,-0.5,0,0"
+                                        Data="M 7 8 l0 20 a 2 2 0 0 0 2 2 l19 0 a 2 2 0 0 0 2 -2 l0 -20 z M 7 9 l23 0 M 7 10 l23 0"
+                                        />
+                                </Grid>
                             </Grid>
                         </Grid>
 
                         <!-- Center star with a max of 9 buttons shown when tool window is dragged of document container -->
+                        <!--Not changed yet-->
                         <Grid x:Name="PART_DocumentPaneFullDropTargets">
                             <Grid HorizontalAlignment="Center"
                                   VerticalAlignment="Center">
